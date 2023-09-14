@@ -1,4 +1,5 @@
 const User = require('./User');
+const Blogpost = require('./Blogpost');
 
 
 /*User.hasMany(CrossSet, {
@@ -7,4 +8,4 @@ const User = require('./User');
 });*/
 
 
-module.exports = { User};
+module.exports = {User, Blogpost};

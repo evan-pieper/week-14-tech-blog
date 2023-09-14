@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const {User} = require('../models');
+const {User, Blogpost} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
     // Get all CrossSet data and JOIN with user data
-    const CrossSetData = await CrossSet.findAll({
+    console.log("get all blogposts route called");
+    /*const BlogPostData = await Blogpost.findAll({
       include: [
         {
           model: User,
@@ -13,13 +14,15 @@ router.get('/', withAuth, async (req, res) => {
         },
       ],
     });
+    console.log("BlogPostData: ", BlogPostData) */  //***integrate this back in when you get the blogpost model working***
 
     // Serialize data so the template can read it
-    const CrossSets = CrossSetData.map((CrossSet) => CrossSet.get({ plain: true }));
+    //const Blogposts = BlogPostData.map((Blogpost) => Blogpost.get({ plain: true }));  //***This is the original code***
 
     // Pass serialized data and session flag into template
+    console.log("rendering homepage");
     res.render('homepage', { 
-      CrossSets, 
+      //Blogposts, ***integrate this back in when you get the blogpost model working***
       logged_in: req.session.logged_in 
     });
   } catch (err) {
