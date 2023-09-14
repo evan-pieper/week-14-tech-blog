@@ -1,10 +1,8 @@
 <!-- Loop over each object in the projects array -->
 <h1> This is the homepage!</h1>
-<!--{{#each Blogpost as |Blogpost| }}
+{{#each Blogposts as |Blogpost| }}
   <div>
-    <h2>{{name}}</h2>
-    <p>{{configuration}}</p>
-    <p>Created on: {{format_date date_created}}</p>
-    <p>Created by: {{user.name}}</p>
+    <h2>{{title}}</h2>
+    <p>{{content}}</p>
   </div>
-{{/each}} -->
+{{/each}}

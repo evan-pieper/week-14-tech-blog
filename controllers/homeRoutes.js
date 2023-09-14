@@ -2,28 +2,28 @@ const router = require('express').Router();
 const {User, Blogpost} = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // Get all CrossSet data and JOIN with user data
     console.log("get all blogposts route called");
-    /*const BlogPostData = await Blogpost.findAll({
+    const BlogPostData = await Blogpost.findAll({
       include: [
         {
           model: User,
-          attributes: ['name'],
+          //attributes: ['name'], //***integrate this back in when you get the blogpost model working***
         },
       ],
     });
-    console.log("BlogPostData: ", BlogPostData) */  //***integrate this back in when you get the blogpost model working***
+    //console.log("BlogPostData: ", BlogPostData)
 
     // Serialize data so the template can read it
-    //const Blogposts = BlogPostData.map((Blogpost) => Blogpost.get({ plain: true }));  //***This is the original code***
+    const Blogposts = BlogPostData.map((Blogpost) => Blogpost.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     console.log("rendering homepage");
     res.render('homepage', { 
-      //Blogposts, ***integrate this back in when you get the blogpost model working***
-      logged_in: req.session.logged_in 
+      Blogposts,
+      //logged_in: req.session.logged_in  //*** don't need to login to view homepage anymore *** 
     });
   } catch (err) {
     res.status(500).json(err);
