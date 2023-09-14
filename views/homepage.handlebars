@@ -1,8 +1,13 @@
 <!-- Loop over each object in the projects array -->
 <h1> This is the homepage!</h1>
 {{#each Blogposts as |Blogpost| }}
-  <div>
-    <h2>{{title}}</h2>
-    <p>{{content}}</p>
+  <div class = "post">
+    <div class = "postHeader">
+      <h2>{{title}}</h2>
+      <p>{{date_created}}</p>
+    </div>
+    <div class = "postBody">
+      <p>{{content}}</p>
+    </div>
   </div>
 {{/each}}
