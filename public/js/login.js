@@ -17,7 +17,8 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      console.log(response.statusText);
+      alert("Incorrect email or password, please try again");
     }
   }
 };

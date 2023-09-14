@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CroX</title>
+  <title>The Tech Blog</title>
  <!-- <link rel="stylesheet" href="/css/jass.css"> -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -12,7 +12,7 @@
 <body>
   <div>
     <header>
-      <h1>Welcome to your new favorite blog!</h1>
+      <h1>The Tech Blog</h1>
       <nav>
         <button class= "nav-button" id="home">Home</button>
         <button class= "nav-button" id="dashboard">Dashboard</button>
@@ -21,6 +21,11 @@
         <!-- <a href="/profile">profile</a> | -->
         <button class="no-button" id="logout">logout</button>
         {{/if}}
+
+        {{#unless logged_in}} <!-- if the user is not logged in render the login button -->
+        <button class="no-button" id="login">login</button>
+        {{/unless}}
+
       </nav>
     </header>
     <main>
