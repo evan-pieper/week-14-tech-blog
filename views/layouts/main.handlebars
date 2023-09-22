@@ -12,18 +12,19 @@
 <body>
   <header>
     <nav>
-      <button class= "nav-button" id="home">Home</button>
-      <button class= "nav-button" id="dashboard">Dashboard</button>
+      <button id="home-button">Home</button>
+      <button id="dashboard-button">Dashboard</button>
       <!-- Conditionally render login or logout links -->
       {{#if logged_in}}
-      <!-- <a href="/profile">profile</a> | -->
-      <button class="no-button" id="logout">logout</button>
+      <!-- <a href="/profile">profile</a>  -->
+      <button id="logout-button">logout</button>
       {{/if}}
 
       {{#unless logged_in}} <!-- if the user is not logged in render the login button -->
-      <button class="no-button" id="login">login</button>
+      <button id="login-button">login</button>
       {{/unless}}
     </nav>
+
     <h1>The Tech Blog</h1>
   </header>
   <main>
@@ -31,10 +32,7 @@
     {{{ body }}}
   </main>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-    <script src="/js/logout.js"></script>
-  {{/if}}
+  <script src="/js/nav.js" type = "text/javascript"></script> <!-- this is the script that will handle the nav buttons -->
 </body>
 
 </html>

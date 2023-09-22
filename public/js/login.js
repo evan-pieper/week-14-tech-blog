@@ -23,6 +23,7 @@ const loginFormHandler = async (event) => {
   }
 };
 
+//TODO: move the signup form to a new signup page
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
