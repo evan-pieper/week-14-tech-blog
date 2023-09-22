@@ -10,36 +10,30 @@
 </head>
 
 <body>
-  <div>
-    <header>
-      <h1>The Tech Blog</h1>
-      <nav>
-        <button class= "nav-button" id="home">Home</button>
-        <button class= "nav-button" id="dashboard">Dashboard</button>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <!-- <a href="/profile">profile</a> | -->
-        <button class="no-button" id="logout">logout</button>
-        {{/if}}
+  <header>
+    <nav>
+      <button class= "nav-button" id="home">Home</button>
+      <button class= "nav-button" id="dashboard">Dashboard</button>
+      <!-- Conditionally render login or logout links -->
+      {{#if logged_in}}
+      <!-- <a href="/profile">profile</a> | -->
+      <button class="no-button" id="logout">logout</button>
+      {{/if}}
 
-        {{#unless logged_in}} <!-- if the user is not logged in render the login button -->
-        <button class="no-button" id="login">login</button>
-        {{/unless}}
-
-      </nav>
-    </header>
-    <main>
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      <h3>Footer stuff goes here</h3>
-    </footer>
-  </div>
+      {{#unless logged_in}} <!-- if the user is not logged in render the login button -->
+      <button class="no-button" id="login">login</button>
+      {{/unless}}
+    </nav>
+    <h1>The Tech Blog</h1>
+  </header>
+  <main>
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </main>
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}
-  <script src="/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
   {{/if}}
 </body>
 

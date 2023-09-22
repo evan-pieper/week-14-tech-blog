@@ -1,46 +1,17 @@
 :root{
-  --lightColor: #CFDFCA;
-  --darkColor: #6B1603;
+  --lightColor: #d9ead3;
+  --darkColor: #25120c;
 }
 
 html{
   background-color: var(--lightColor);
-  color: 	#000000;
+  color: var(--darkColor);
 }
 
 header{
   background-color: var(--darkColor);
-  color: #ffffff;
-
-  h1{
-    background-color: var(--lightColor);
-    color: var(--darkColor);
-  }
-}
-
-header, .project:not(:last-child) {
-  border-bottom: 1px solid #ccc;
-}
-
-.no-button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #1b89bc;
-  text-decoration: none;
-  font-size: 100%;
-}
-
-.no-button:hover {
-  color: #065b83;
-  text-decoration: underline;
-}
-
-.dollar-amount {
-  color: #056605;
-  font-weight: bold;
-  margin-left: -5px;
+  color: var(--lightColor);
+  padding-left: 3%;
 }
 
 .post{
@@ -48,6 +19,6 @@ header, .project:not(:last-child) {
   color: var(--darkColor);
   border: 1px solid var(--darkColor);
   border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 10px 10px 10px 3%;
+  margin: 10px 0 10px 0;
 }
