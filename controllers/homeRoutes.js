@@ -30,28 +30,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/CrossSet/:id', withAuth, async (req, res) => {
-  try {
-    const CrossSetData = await  CrossSet.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
-
-    const SerialCrossSet = CrossSetData.get({ plain: true });
-
-    res.render('CrossSet', {
-      ...SerialCrossSet,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
@@ -73,13 +51,28 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  // If the user is already logged in, redirect the request to home page
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    console.error("login route called when user is already logged in");
+    res.redirect('/');
     return;
   }
 
   res.render('login');
+});
+
+router.get('/logout', (req, res) => {
+  if (!req.session.logged_in) {   // If the user is already logged in, redirect request to home page
+    console.error("logout route called when user is not logged in");
+    res.redirect('/');
+    return;
+  }
+  console.log("logging out user");
+  req.session.destroy(() => {
+    console.log("user logged out");
+    res.status(204).end();
+  });
+  res.render('logout');
 });
 
 module.exports = router;

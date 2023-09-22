@@ -4,9 +4,12 @@ const dashboardButton = document.querySelector('#dashboard-button');
 const loginButton = document.querySelector('#login-button');
 const logoutButton = document.querySelector('#logout-button');
 
-let loggedIn = false;
 if(loginButton){
-    loggedIn = true;
+    console.log('logged in button found');
+}
+
+if(logoutButton){
+    console.log('logged out button found');
 }
 
 homeButton.addEventListener('click', () => {
@@ -17,16 +20,16 @@ dashboardButton.addEventListener('click', () => {
     document.location.replace('/dashboard');
 });
 
-if(loggedIn){
+if(loginButton){
     loginButton.addEventListener('click', () => {
-        loggedIn = false;
-        document.location.replace('/logout'); //TODO: add the logout route
+        console.log('login button clicked');
+        document.location.replace('/login'); //TODO: add the logout route
     });
 }
 
-if(!loggedIn){
+if(logoutButton){
     logoutButton.addEventListener('click', () => {
-        loggedIn = true;
-        document.location.replace('/login'); //TODO: add the login route
+        console.log('logout button clicked');
+        document.location.replace('/logout'); //TODO: add the login route
     });
 }
