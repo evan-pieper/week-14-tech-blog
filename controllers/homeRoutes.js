@@ -75,7 +75,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  if (!req.session.logged_in) {   // If the user is already logged in, redirect request to login page
+  if (req.session.logged_in === false) {   // If the user is already logged in, redirect request to login page
     console.error("logout route called when user is not logged in");
     res.redirect('/login');
     return;
@@ -83,9 +83,10 @@ router.get('/logout', (req, res) => {
   console.log("logging out user");
   req.session.destroy(() => {
     console.log("user logged out");
-    res.status(204).end();
+    console.log("rendering logout page");
+    res.status(200).render('logout', {logged_in: false});
   });
-  res.render('logout');
+  return;
 });
 
 module.exports = router;
