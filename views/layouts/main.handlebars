@@ -15,8 +15,7 @@
       <button id="home-button">Home</button>
       <button id="dashboard-button">Dashboard</button>
       <!-- Conditionally render login or logout links -->
-      {{#if logged_in}} <!-- THIS IS THE PROBLEM, need to figure out cookies integration -->
-      <!-- <a href="/profile">profile</a>  -->
+      {{#if logged_in}} 
       <button id="logout-button">logout</button>
       {{/if}}
 

@@ -26,3 +26,5 @@ const loginFormHandler = async (event) => {
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
+
+//module.exports = loginFormHandler; see if this is needed
