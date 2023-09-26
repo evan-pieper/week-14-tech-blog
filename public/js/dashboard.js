@@ -102,6 +102,36 @@ editPostButtons.forEach((button) => {
     });
 });
 
+saveEditButtons.forEach((button) => {
+    button.addEventListener('click', async (event) => {
+        console.log("save edit button clicked");
+        const post = button.parentElement;
+        const id = post.id;
+        console.log(`attempting to save edit to post ${id}`);
+        const editTitle = post.querySelector('.editTitle').value;
+        const editContent = post.querySelector('.editContent').value;
+        if (editTitle && editContent) {
+            // Send a POST request to the API endpoint
+            const response = await fetch(`/api/blogposts/${id}`, {
+              method: 'PUT',
+              body: JSON.stringify({ editTitle, editContent }),
+              headers: { 'Content-Type': 'application/json' },
+            });
+        
+            console.log(response);
+            if (response.ok) {
+                alert("Post updated successfully");
+                // If successful, redirect the browser to the profile page
+                document.location.replace('/dashboard');
+            } else {
+                console.log(response.statusText);
+                alert("Error: post not updated");
+            }
+        }
+        else{ alert("Error: missing title or description"); }
+    });
+});
+
 deletePostButtons.forEach((button) => {
     button.addEventListener('click', async (event) => {
         console.log("delete post button clicked");

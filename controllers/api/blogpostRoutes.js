@@ -45,15 +45,17 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const blogpostData = await Blogpost.update(
+        console.log("blogpost put route called");
+        const blogpostData = await Blogpost.findByPk(req.params.id);
+        const updateResponse = await blogpostData.update(
             {
-                title: req.body.title,
-                content: req.body.content,
+                title: req.body.editTitle,
+                content: req.body.editContent,
             },
             {
                 where: {
                     id: req.params.id,
-                    user_id: req.session.user_id,
+                    //user_id: req.session.user_id,
                 },
             }
         );
@@ -62,8 +64,11 @@ router.put('/:id', async (req, res) => {
             res.status(404).json({ message: 'No blogpost found with this id!' });
             return;
         }
-
-        res.status(200).json(blogpostData);
+        if(!updateResponse){
+            res.status(404).json({ message: 'error updating blogpost' });
+            return;
+        }
+        res.status(200).json(updateResponse);
     } catch (err) {
         res.status(500).json(err);
     }
