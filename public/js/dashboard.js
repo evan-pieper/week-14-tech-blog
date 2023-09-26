@@ -2,6 +2,7 @@ console.log('dashboard.js loaded');
 const newPostButton = document.querySelector('#new-post-button');
 const expandablePosts = document.querySelectorAll('.expandable');
 const deletePostButtons = document.querySelectorAll('.delete-post-button');
+const editPostButtons = document.querySelectorAll('.edit-post-button');
 
 const NewPostFormHandler = async (event) => {
     event.preventDefault();
@@ -48,6 +49,15 @@ const closeAllPosts = () => {
     });
 };
 
+const handleEditPost = async (post) => {
+    const currentEdits = post.querySelectorAll('.editing');
+    currentEdits.forEach((edit) => {
+        edit.classList.remove('editing');
+    });
+    post.classList.add('editing');
+    console.log("post " + post.id + " is now being edited");
+};
+
 expandablePosts.forEach((post) => {
     post.addEventListener('click', (event) => {
         const id = post.id;
@@ -62,6 +72,16 @@ expandablePosts.forEach((post) => {
             closeAllPosts();
             expandPost(post);
         }
+    });
+});
+
+editPostButtons.forEach((button) => {
+    button.addEventListener('click', async (event) => {
+        console.log("edit post button clicked");
+        const post = button.parentElement;
+        const id = post.id;
+        console.log(`attempting to edit post ${id}`);
+        handleEditPost(post);
     });
 });
 
