@@ -43,8 +43,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    //console.log("user: ");
-    //console.log(user);
+    console.log("user: ");
+    console.log(user);
     //console.log("rendering dashboard");
     res.status(200).render('dashboard', {
       ...user,
