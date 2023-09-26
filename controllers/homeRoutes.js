@@ -30,10 +30,12 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+
 // Use withAuth middleware to prevent access to route if user is not logged in
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    console.log("dashboard route called");
+    //console.log("dashboard route called");
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
@@ -41,11 +43,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    console.log("user: ");
-    console.log(user);
-    console.log("rendering dashboard");
+    //console.log("user: ");
+    //console.log(user);
+    //console.log("rendering dashboard");
     res.status(200).render('dashboard', {
-      user,
+      ...user,
       logged_in: req.session.logged_in
     });
   } catch (err) {
