@@ -1,11 +1,11 @@
 <h1>Dashboard</h1>
 
 {{#each blogposts as |Blogpost| }}
-  <div class = "post expandable" id = "{{id}}">
+  <div class = "post dashPost expandable" id = "{{id}}">
     <div class = "postHeader">
       <h1>id: {{id}}</h1>
-      <h2>{{title}}</h2>
-      <p>{{date_created}}</p>
+      <h2 class = "title">{{title}}</h2>
+      <p class = "dateCreated">{{date_created}}</p>
     </div>
     <div class = "postBody">
       <p>{{content}}</p>

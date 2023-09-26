@@ -22,3 +22,15 @@ header{
   padding: 10px 10px 10px 3%;
   margin: 10px 0 10px 0;
 }
+
+.dashPost{
+  .postBody, .delete-post-button{
+    display: none;
+  }
+}
+
+.expanded{
+  .postBody, .delete-post-button{
+    display: block;
+  }
+}
