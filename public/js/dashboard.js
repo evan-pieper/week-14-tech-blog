@@ -1,8 +1,8 @@
 console.log('dashboard.js loaded');
 const newPostButton = document.querySelector('#new-post-button');
-/*const editPostButtons = document.querySelectorAll('.edit-post-button');
-const deletePostButtons = document.querySelectorAll('.delete-post-button');
-*/
+const expandablePosts = document.querySelectorAll('.expandable');
+//const deletePostButtons = document.querySelectorAll('.delete-post-button');
+
 const NewPostFormHandler = async (event) => {
     event.preventDefault();
     console.log("new post form handler called");
@@ -28,35 +28,19 @@ const NewPostFormHandler = async (event) => {
    
 };
 
-newPostButton.addEventListener('click', NewPostFormHandler);
+newPostButton.addEventListener('click', NewPostFormHandler); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler
 
-const testButton = document.querySelector('#test-button');
-testButton.addEventListener('click', async (event) => {
-    console.log("test button clicked");
-    const response = await fetch('/api/blogposts/test', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-    });
 
-    if (response.ok) {
-        console.log("test passed");
-        const data = await response.json();
-        console.log(data);
-    } else {
-        console.log(response.statusText);
-        alert("Error: test failed");
-    }
-});
-
-/*
-editPostButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        const id = event.target.getAttribute('data-id');
+expandablePosts.forEach((post) => {
+    post.addEventListener('click', (event) => {
+        const id = post.id;
+        console.log(id);
         //document.location.replace(`/editpost/${id}`); //TODO: add edit post functionality
         console.log(`edit post button clicked for post ${id}`);
     });
 });
 
+/*
 deletePostButtons.forEach((button) => {
     button.addEventListener('click', async (event) => {
         console.log("delete post button clicked");

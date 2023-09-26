@@ -1,8 +1,9 @@
-<h1>dashboard goes here</h1>
+<h1>Dashboard</h1>
 
 {{#each blogposts as |Blogpost| }}
-  <div class = "post">
+  <div class = "post expandable" id = "{{id}}">
     <div class = "postHeader">
+      <h1>id: {{id}}</h1>
       <h2>{{title}}</h2>
       <p>{{date_created}}</p>
     </div>
@@ -12,7 +13,7 @@
   </div>
 {{/each}}
 
-<div> 
+<div class = "post" id = "new-post-div"> 
   <h2>new post</h2>
   <form id = "new-post-form">
     <label for = "title">title</label>
@@ -22,7 +23,6 @@
   </form>
 </div>
 
-<button id = "test-button">test route</button>
 
 <button id = "new-post-button">+</button>
 
