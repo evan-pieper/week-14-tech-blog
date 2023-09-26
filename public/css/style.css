@@ -24,7 +24,7 @@ header{
 }
 
 .dashPost{
-  .postContent, .editForm, .edit-post-button, .save-post-button, .cancel-post-button, .delete-post-button{
+  .postContent, .editForm, .edit-post-button, .save-post-button, .cancel-edit-button, .delete-post-button{
     display: none;
   }
 }
@@ -36,7 +36,7 @@ header{
 }
 
 .editing{
-  .editForm, .cancel-post-button, .save-post-button{
+  .editForm, .cancel-edit-button, .save-post-button{
     display: block;
   }
   .postContent, .title{

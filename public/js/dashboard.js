@@ -3,6 +3,8 @@ const newPostButton = document.querySelector('#new-post-button');
 const expandablePosts = document.querySelectorAll('.expandable');
 const deletePostButtons = document.querySelectorAll('.delete-post-button');
 const editPostButtons = document.querySelectorAll('.edit-post-button');
+const cancelEditButtons = document.querySelectorAll('.cancel-edit-button');
+const saveEditButtons = document.querySelectorAll('.save-edit-button');
 
 const NewPostFormHandler = async (event) => {
     event.preventDefault();
@@ -62,6 +64,12 @@ const closeAllEdits = () => {
         console.log("post " + edit.id + " is no longer being edited");
     });
 };
+
+cancelEditButtons.forEach((button) => { // add event listener to each cancel edit button, so that when it is clicked, the post is no longer being edited
+    button.addEventListener('click', async (event) => {
+        closeAllEdits();
+    });
+});
 
 expandablePosts.forEach((post) => {
     post.addEventListener('click', (event) => {
