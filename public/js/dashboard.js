@@ -1,7 +1,7 @@
 console.log('dashboard.js loaded');
 const newPostButton = document.querySelector('#new-post-button');
 const expandablePosts = document.querySelectorAll('.expandable');
-//const deletePostButtons = document.querySelectorAll('.delete-post-button');
+const deletePostButtons = document.querySelectorAll('.delete-post-button');
 
 const NewPostFormHandler = async (event) => {
     event.preventDefault();
@@ -40,6 +40,14 @@ const closePost = (clickedPost) => {
     clickedPost.classList.remove('expanded');
 }
 
+const closeAllPosts = () => {  
+    console.log("closeAllPosts called");
+    const expandedPosts = document.querySelectorAll('.expanded');
+    expandedPosts.forEach((expandedPost) => {
+        closePost(expandedPost);
+    });
+};
+
 expandablePosts.forEach((post) => {
     post.addEventListener('click', (event) => {
         const id = post.id;
@@ -51,21 +59,16 @@ expandablePosts.forEach((post) => {
             closePost(post);
         }
         else{
-            const expandedPosts = document.querySelectorAll('.expanded');
-            expandedPosts.forEach((exposts) => {
-                closePost(exposts);
-            });
+            closeAllPosts();
             expandPost(post);
         }
-
     });
 });
 
-/*
 deletePostButtons.forEach((button) => {
     button.addEventListener('click', async (event) => {
         console.log("delete post button clicked");
-        const id = event.target.getAttribute('data-id');
+        const id = event.target.parentElement.id;
         console.log(`attempting to delete post ${id}`);
         const response = await fetch(`/api/blogposts/${id}`, {
             method: 'DELETE',
@@ -78,4 +81,4 @@ deletePostButtons.forEach((button) => {
             alert(response.statusText);
         }
     });
-}); */ 
+});
