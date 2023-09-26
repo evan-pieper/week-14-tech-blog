@@ -30,13 +30,34 @@ const NewPostFormHandler = async (event) => {
 
 newPostButton.addEventListener('click', NewPostFormHandler); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler
 
+const expandPost = (clickedPost) => {
+    console.log("expandPost called on post: " + clickedPost.id);
+    clickedPost.classList.add('expanded');
+};
+
+const closePost = (clickedPost) => {
+    console.log("closePost called on post: " + clickedPost.id);
+    clickedPost.classList.remove('expanded');
+}
 
 expandablePosts.forEach((post) => {
     post.addEventListener('click', (event) => {
         const id = post.id;
-        console.log(id);
-        //document.location.replace(`/editpost/${id}`); //TODO: add edit post functionality
-        console.log(`edit post button clicked for post ${id}`);
+        //console.log(id);
+        console.log(`post ${id} clicked, expanding post`);
+        console.log("post: ");
+        console.log(post);
+        if(post.classList.contains('expanded')){
+            closePost(post);
+        }
+        else{
+            const expandedPosts = document.querySelectorAll('.expanded');
+            expandedPosts.forEach((exposts) => {
+                closePost(exposts);
+            });
+            expandPost(post);
+        }
+
     });
 });
 
