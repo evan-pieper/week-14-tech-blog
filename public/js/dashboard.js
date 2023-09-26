@@ -50,12 +50,17 @@ const closeAllPosts = () => {
 };
 
 const handleEditPost = async (post) => {
-    const currentEdits = post.querySelectorAll('.editing');
-    currentEdits.forEach((edit) => {
-        edit.classList.remove('editing');
-    });
-    post.classList.add('editing');
+    closeAllEdits(); // close all other edits
+    post.classList.add('editing'); // add editing class to post
     console.log("post " + post.id + " is now being edited");
+};
+
+const closeAllEdits = () => {
+    const currentEdits = document.querySelectorAll('.editing'); // get all posts that are currently being edited
+    currentEdits.forEach((edit) => {
+        edit.classList.remove('editing'); // remove editing class from each post
+        console.log("post " + edit.id + " is no longer being edited");
+    });
 };
 
 expandablePosts.forEach((post) => {
@@ -65,10 +70,14 @@ expandablePosts.forEach((post) => {
         console.log(`post ${id} clicked, expanding post`);
         console.log("post: ");
         console.log(post);
-        if(post.classList.contains('expanded')){
+        if(post.classList.contains('editing')){ // if post is being edited, don't expand it
+            console.log("post is being edited, aborting post close");
+            return;
+        }
+        if(post.classList.contains('expanded')){ // if post is already expanded, close it (if its not being edited)
             closePost(post);
         }
-        else{
+        else{ // if post is not expanded, close all other posts and expand it
             closeAllPosts();
             expandPost(post);
         }

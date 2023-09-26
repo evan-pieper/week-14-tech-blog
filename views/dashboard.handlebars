@@ -3,14 +3,19 @@
 {{#each blogposts as |Blogpost| }}
   <div class = "post dashPost expandable" id = "{{id}}">
     <div class = "postHeader">
-      <h1>id: {{id}}</h1>
       <h2 class = "title">{{title}}</h2>
       <p class = "dateCreated">{{date_created}}</p>
     </div>
-    <div class = "postBody">
-      <p>{{content}}</p>
-    </div>
+    <p class = "postContent">{{content}}</p>
+    <form class = "editForm">
+      <label for = "title">title</label>
+      <input type = "text" name = "title" class = "title" value = "{{title}}">
+      <label for = "content">content</label>
+      <textarea name = "content" id = "content" cols = "30" rows = "10">{{content}}</textarea>
+    </form>
     <button class = "edit-post-button">edit</button>
+    <button class = "save-post-button">save</button>
+    <button class = "cancel-post-button">cancel</button>
     <button class = "delete-post-button"> X </button>
   </div>
 {{/each}}

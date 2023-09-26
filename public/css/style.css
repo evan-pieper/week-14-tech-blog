@@ -24,13 +24,22 @@ header{
 }
 
 .dashPost{
-  .postBody, .delete-post-button{
+  .postContent, .editForm, .edit-post-button, .save-post-button, .cancel-post-button, .delete-post-button{
     display: none;
   }
 }
 
 .expanded{
-  .postBody, .delete-post-button{
+  .postContent, .edit-post-button, .delete-post-button{
     display: block;
+  }
+}
+
+.editing{
+  .editForm, .cancel-post-button, .save-post-button{
+    display: block;
+  }
+  .postContent, .title{
+    display: none;
   }
 }
