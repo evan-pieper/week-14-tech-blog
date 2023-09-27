@@ -23,6 +23,15 @@ header{
   margin: 10px 0 10px 0;
 }
 
+.postHeader{
+  background-color: var(--darkColor);
+  color: var(--lightColor);
+  margin: 0 -1% 10px -3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .dashPost{
   .postContent, .editForm, .edit-post-button, .save-edit-button, .cancel-edit-button, .delete-post-button{
     display: none;
