@@ -67,6 +67,7 @@ const closeAllEdits = () => {
 
 cancelEditButtons.forEach((button) => { // add event listener to each cancel edit button, so that when it is clicked, the post is no longer being edited
     button.addEventListener('click', async (event) => {
+        event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
         closeAllEdits();
     });
 });
@@ -102,7 +103,7 @@ editPostButtons.forEach((button) => {
     });
 });
 
-saveEditButtons.forEach((button) => {
+saveEditButtons.forEach((button) => {    //TODO: when the cancel edit button is clicked, the edit form is closed, but the post is still expanded
     button.addEventListener('click', async (event) => {
         console.log("save edit button clicked");
         const post = button.parentElement;
