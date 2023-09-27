@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const withAuth = require('../../utils/auth');
 const { Comment } = require('../../models');
 
 router.get('/:post_id', async (req, res) => {  // get all comments for a specific blogpost
@@ -25,7 +26,7 @@ router.get('/:post_id', async (req, res) => {  // get all comments for a specifi
     }
 }); */
 
-router.post('/:blogpost_id', async (req, res) => {  // create a new comment for a specific blogpost (req.params.id is the blogpost_id)
+router.post('/:blogpost_id', withAuth, async (req, res) => {  // create a new comment for a specific blogpost (req.params.id is the blogpost_id) [with auth because you have to be logged in to comment]
     try {
         const newComment = await Comment.create({
         ...req.body, //spreads the properties of the req.body object into this new object so that we can add the user_id property to it
@@ -39,7 +40,7 @@ router.post('/:blogpost_id', async (req, res) => {  // create a new comment for 
     }
 });
 
-router.delete('/:id', async (req, res) => {  // delete a comment with a specific id (req.params.id is the comment_id)
+router.delete('/:id', withAuth, async (req, res) => {  // delete a comment with a specific id (req.params.id is the comment_id) [with auth because you have to be logged in to delete a comment, because user needs to be logged in so we know if its there comment or not]
     try {
         const commentData = await Comment.destroy({
             where: {
