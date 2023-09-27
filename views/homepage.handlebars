@@ -1,18 +1,24 @@
 <!-- Loop over each object in the projects array -->
 {{#each Blogposts as |Blogpost| }}
-  <div class = "post expandable"> <!-- expandable so that you can click it and view comments on post -->
+  <div class = "post expandable" id = "{{id}}"> <!-- expandable so that you can click it and view comments on post -->
     <div class = "postHeader">
       <h2>{{title}}</h2>
       <p>{{date_created}}</p>
     </div>
     <div class = "postBody">
       <p>{{content}}</p>
+      <form class = "new-comment-form">
         <h2>new post</h2>
-      <form id = "new-comment-form">
         <label for = "commentContent">comment content: </label>
         <textarea name = "commentContent" id = "commentContent" cols = "30" rows = "10"></textarea>
+        <button class = "submit-comment-button">Submit Comment</button>
+        <button class = "cancel-comment-button">Cancel</button>
       </form>
-      <button id = "new-comment-button">Submit Comment</button>
+      <button class = "new-comment-button">Add Comment</button>
+      <div class = "commentContainer">
+        <!-- <p>{{comment}}</p>           TODO: add comment model and templating here      -->
+        <h2>Comments go here</h2>
+      </div>
     </div>
   </div>
 {{/each}}

@@ -21,6 +21,9 @@ header{
   border-radius: 5px;
   padding: 10px 10px 10px 3%;
   margin: 10px 0 10px 0;
+  .postBody{
+    display: none;
+  }
 }
 
 .postHeader{
@@ -39,8 +42,11 @@ header{
 }
 
 .expanded{
-  .postContent, .edit-post-button, .delete-post-button{
+  .postContent, .edit-post-button, .delete-post-button, .postBody{
     display: block;
+  }
+  .new-comment-form, .submit-comment-button, .cancel-comment-button{
+    display: none;
   }
 }
 
@@ -50,5 +56,11 @@ header{
   }
   .postContent, .title{
     display: none;
+  }
+}
+
+.commenting{
+  .commentForm, .cancel-comment-button, .submit-comment-button{
+    display: block;
   }
 }

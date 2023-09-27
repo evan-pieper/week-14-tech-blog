@@ -1,20 +1,21 @@
 console.log('dashboard.js loaded');
-const newCommentButton = document.querySelector('#new-comment-button');
+const newCommentButton = document.querySelector('.new-comment-button');
 const expandablePosts = document.querySelectorAll('.expandable');
-const deleteCommentButtons = document.querySelectorAll('.delete-comment-button');
+//const deleteCommentButtons = document.querySelectorAll('.delete-comment-button');
 const cancelCommentButtons = document.querySelectorAll('.cancel-comment-button');
 const submitCommentButtons = document.querySelectorAll('.submit-comment-button');
 
-const NewCommentFormHandler = async (event) => {
+const submitComment = async (event) => {
     event.preventDefault();
-    console.log("new comment form handler called");
-    const content = document.querySelector('#content').value.trim();
-    const blogpostId = 1; // TODO: change this to the id of the post that the comment is being made on ***********
-    if (content) {
+    console.log("submit comment called");
+    const blogpost = event.target.parentElement.parentElement.parentElement;
+    const commentContent = blogpost.querySelector('.commentContent').value;
+    const blogpostId = blogpost.id; // TODO: change this to the id of the post that the comment is being made on ***********
+    if (commentContent) {
         // Send a POST request to the API endpoint
         const response = await fetch(`/api/comments/${blogpostId}`, {
           method: 'POST',
-          body: JSON.stringify({ title, content }),
+          body: JSON.stringify({ commentContent }),
           headers: { 'Content-Type': 'application/json' },
         });
     
@@ -30,7 +31,7 @@ const NewCommentFormHandler = async (event) => {
    
 };
 
-newCommentButton.addEventListener('click', NewCommentFormHandler); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler
+newCommentButton.addEventListener('click', submitComment); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler        ************Add this back in later************
 
 const expandPost = (clickedPost) => {
     console.log("expandPost called on post: " + clickedPost.id);
@@ -50,17 +51,17 @@ const closeAllPosts = () => {
     });
 };
 
-const handleEditPost = async (post) => {
+const handleCommentPost = async (post) => {
     closeAllEdits(); // close all other edits
-    post.classList.add('editing'); // add editing class to post
-    console.log("post " + post.id + " is now being edited");
+    post.classList.add('commenting'); // add editing class to post
+    console.log("post " + post.id + " is now being commented on");
 };
 
-const closeAllEdits = () => {
-    const currentEdits = document.querySelectorAll('.editing'); // get all posts that are currently being edited
-    currentEdits.forEach((edit) => {
-        edit.classList.remove('editing'); // remove editing class from each post
-        console.log("post " + edit.id + " is no longer being edited");
+const closeAllComments = () => {
+    const currentCommenting = document.querySelectorAll('.commenting'); // get all posts that are currently being edited
+    currentCommenting.forEach((comment) => {
+        comment.classList.remove('commenting'); // remove editing class from each post
+        console.log("post " + comment.id + " is no longer being commented on");
     });
 };
 
@@ -78,8 +79,8 @@ expandablePosts.forEach((post) => {
         console.log(`post ${id} clicked, expanding post`);
         console.log("post: ");
         console.log(post);
-        if(post.classList.contains('editing')){ // if post is being edited, don't expand it
-            console.log("post is being edited, aborting post close");
+        if(post.classList.contains('commenting')){ // if post is being edited, don't expand it
+            console.log("post is being commented on, aborting post close");
             return;
         }
         if(post.classList.contains('expanded')){ // if post is already expanded, close it (if its not being edited)
@@ -100,7 +101,7 @@ submitCommentButtons.forEach((button) => {    //TODO: when the cancel edit butto
         console.log(`attempting to submit comment to post ${id}`);
         const commentContent = post.querySelector('.commentContent').value;
         if (commentContent) {
-            // Send a POST request to the API endpoint
+            // Send a POST request to the API comments endpoint
             const response = await fetch(`/api/comments/${blogpostId}`, {
               method: 'POST',
               body: JSON.stringify({ commentContent }),
