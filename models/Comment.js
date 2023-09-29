@@ -27,6 +27,10 @@ Comment.init(
         key: 'id',
         },
     },
+    commenter_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     blogpost_id: {
         type: DataTypes.INTEGER,
         references: {

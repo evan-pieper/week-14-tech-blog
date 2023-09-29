@@ -2,11 +2,11 @@
 {{#each Blogposts as |Blogpost| }}
   <div class = "post expandable" id = "{{id}}"> <!-- expandable so that you can click it and view comments on post -->
     <div class = "postHeader">
-      <h2>{{title}}</h2>
-      <p>{{date_created}}</p>
+      <h2>{{Blogpost.title}}</h2>
+      <p>{{Blogpost.date_created}}</p>
     </div>
     <div class = "postBody">
-      <p>{{content}}</p>
+      <p>{{Blogpost.content}}</p>
       <form class = "new-comment-form">
         <h2>new post</h2>
         <label for = "commentContent">comment content: </label>
@@ -15,7 +15,7 @@
         <button class = "cancel-comment-button">Cancel</button>
       </form>
       <button class = "new-comment-button">Add Comment</button>
-      <div class = "commentContainer">
+      <div class = "commentsContainer">
         <!-- <p>{{comment}}</p>           TODO: add comment model and templating here      -->
         <h2>Comments go here</h2>
       </div>
