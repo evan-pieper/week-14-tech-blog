@@ -9,7 +9,9 @@ const submitComment = async (event) => {
     event.preventDefault();
     console.log("submit comment called");
     const blogpost = event.target.parentElement.parentElement.parentElement;
-    const commentContent = "hardcoded comment content (from submitContent)"//blogpost.querySelector('.comment-content').value;
+    //console.log(blogpost);
+    const commentContent = blogpost.querySelector('.comment-content').value;
+    console.log(commentContent);
     const blogpostId = blogpost.id; // TODO: change this to the id of the post that the comment is being made on ***********
     if (commentContent) {
         // Send a POST request to the API endpoint
