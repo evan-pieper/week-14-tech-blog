@@ -1,5 +1,5 @@
 console.log('dashboard.js loaded');
-const newCommentButton = document.querySelector('.new-comment-button');
+const newCommentButtons = document.querySelectorAll('.new-comment-button');
 const expandablePosts = document.querySelectorAll('.expandable');
 //const deleteCommentButtons = document.querySelectorAll('.delete-comment-button');
 const cancelCommentButtons = document.querySelectorAll('.cancel-comment-button');
@@ -9,7 +9,7 @@ const submitComment = async (event) => {
     event.preventDefault();
     console.log("submit comment called");
     const blogpost = event.target.parentElement.parentElement.parentElement;
-    const commentContent = blogpost.querySelector('.commentContent').value;
+    const commentContent = "hardcoded comment content (from submitContent)"//blogpost.querySelector('.commentContent').value;
     const blogpostId = blogpost.id; // TODO: change this to the id of the post that the comment is being made on ***********
     if (commentContent) {
         // Send a POST request to the API endpoint
@@ -31,7 +31,7 @@ const submitComment = async (event) => {
    
 };
 
-newCommentButton.addEventListener('click', submitComment); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler        ************Add this back in later************
+//submitCommentButtons.addEventListener('click', submitComment); // when post function is working, change this to make the form visible instead of calling the form handler, then add a submit button to the form that calls the form handler        ************Add this back in later************
 
 const expandPost = (clickedPost) => {
     console.log("expandPost called on post: " + clickedPost.id);
@@ -51,8 +51,11 @@ const closeAllPosts = () => {
     });
 };
 
-const handleCommentPost = async (post) => {
-    closeAllEdits(); // close all other edits
+const handleCommentPost = async (event) => {
+    event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
+    closeAllComments(); // close all other edits before opening a new one
+    const post = event.target.parentElement.parentElement; // get the post that the button is in (the button is in the form, which is in the post)
+    console.log(post);
     post.classList.add('commenting'); // add editing class to post
     console.log("post " + post.id + " is now being commented on");
 };
@@ -64,6 +67,10 @@ const closeAllComments = () => {
         console.log("post " + comment.id + " is no longer being commented on");
     });
 };
+
+newCommentButtons.forEach((button) => {
+    button.addEventListener('click', handleCommentPost);
+});
 
 cancelCommentButtons.forEach((button) => { // add event listener to each cancel edit button, so that when it is clicked, the post is no longer being edited
     button.addEventListener('click', async (event) => {
