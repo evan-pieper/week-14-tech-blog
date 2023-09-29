@@ -60,7 +60,10 @@ header{
 }
 
 .commenting{
-  .commentForm, .cancel-comment-button, .submit-comment-button{
+  .new-comment-form, .cancel-comment-button, .submit-comment-button{
     display: block;
+  }
+  .new-comment-button{
+    display: none;
   }
 }

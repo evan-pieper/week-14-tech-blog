@@ -75,7 +75,8 @@ newCommentButtons.forEach((button) => {
 cancelCommentButtons.forEach((button) => { // add event listener to each cancel edit button, so that when it is clicked, the post is no longer being edited
     button.addEventListener('click', async (event) => {
         event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
-        closeAllEdits();
+        closeAllComments();
+        //at this point the post window reloads itself for some reason, so the post is unexpanded (fix so that the post stays expanded when the cancel button is clicked)
     });
 });
 
@@ -102,6 +103,7 @@ expandablePosts.forEach((post) => {
 
 submitCommentButtons.forEach((button) => {    //TODO: when the cancel edit button is clicked, the edit form is closed, but the post is still expanded
     button.addEventListener('click', async (event) => {
+        event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
         console.log("submit comment button clicked");
         const post = button.parentElement;
         const blogpostId = post.id;
