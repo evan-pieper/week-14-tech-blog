@@ -16,5 +16,11 @@
         "date_created": "2021-03-12 03:12:34",
         "commenter_id": 1,
         "blogpost_id": 1
+    },
+    {
+        "content": "Test 4 comment on post 2 from user 2",
+        "date_created": "2021-03-12 03:12:34",
+        "commenter_id": 2,
+        "blogpost_id": 2
     }
 ]
