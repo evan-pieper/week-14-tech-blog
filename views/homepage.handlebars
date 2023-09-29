@@ -3,7 +3,7 @@
   <div class = "post expandable" id = "{{id}}"> <!-- expandable so that you can click it and view comments on post -->
     <div class = "postHeader">
       <h2>{{Blogpost.title}}</h2>
-      <p>{{Blogpost.date_created}}</p>
+      <p>Created by {{Blogpost.user.name}} on {{Blogpost.date_created}}</p>
     </div>
     <div class = "postBody">
       <p>{{Blogpost.content}}</p>
@@ -17,6 +17,9 @@
       <button class = "new-comment-button">Add Comment</button>
       <div class = "commentsContainer">
         <!-- <p>{{comment}}</p>           TODO: add comment model and templating here      -->
+        {{#each Comment as |Comment| }}
+          <h1>blogpsot comment succ</h1>
+        {{/each}}
         <h2>Comments go here</h2>
       </div>
     </div>
