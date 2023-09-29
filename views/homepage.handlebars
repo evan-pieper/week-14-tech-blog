@@ -17,8 +17,12 @@
       <button class = "new-comment-button">Add Comment</button>
       <div class = "commentsContainer">
         <!-- <p>{{comment}}</p>           TODO: add comment model and templating here      -->
-        {{#each Comment as |Comment| }}
-          <h1>blogpsot comment succ</h1>
+        {{#each Blogpost.comments as |Comment| }}
+          <div class = "comment">
+            <p>{{Comment.content}}</p>
+            <p>Created on: {{Comment.date_created}}</p>
+            <p>Created by: {{Comment.user.name}}</p>
+          </div>
         {{/each}}
         <h2>Comments go here</h2>
       </div>
