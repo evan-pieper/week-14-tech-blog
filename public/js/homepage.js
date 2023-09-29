@@ -9,7 +9,7 @@ const submitComment = async (event) => {
     event.preventDefault();
     console.log("submit comment called");
     const blogpost = event.target.parentElement.parentElement.parentElement;
-    const commentContent = "hardcoded comment content (from submitContent)"//blogpost.querySelector('.commentContent').value;
+    const commentContent = "hardcoded comment content (from submitContent)"//blogpost.querySelector('.comment-content').value;
     const blogpostId = blogpost.id; // TODO: change this to the id of the post that the comment is being made on ***********
     if (commentContent) {
         // Send a POST request to the API endpoint
@@ -51,16 +51,7 @@ const closeAllPosts = () => {
     });
 };
 
-const handleCommentPost = async (event) => {
-    event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
-    closeAllComments(); // close all other edits before opening a new one
-    const post = event.target.parentElement.parentElement; // get the post that the button is in (the button is in the form, which is in the post)
-    console.log(post);
-    post.classList.add('commenting'); // add editing class to post
-    console.log("post " + post.id + " is now being commented on");
-};
-
-const closeAllComments = () => {
+closeAllComments = () => {
     const currentCommenting = document.querySelectorAll('.commenting'); // get all posts that are currently being edited
     currentCommenting.forEach((comment) => {
         comment.classList.remove('commenting'); // remove editing class from each post
@@ -68,13 +59,21 @@ const closeAllComments = () => {
     });
 };
 
-newCommentButtons.forEach((button) => {
-    button.addEventListener('click', handleCommentPost);
+newCommentButtons.forEach((button) => { // add event listener to each edit button, so that when it is clicked, the post is considered commented on
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        closeAllComments(); // close all other edits before opening a new one
+        const post = event.target.parentElement.parentElement; // get the post that the button is in (the button is in the form, which is in the post)
+        console.log(post);
+        post.classList.add('commenting'); // add editing class to post
+        console.log("post " + post.id + " is now being commented on");
+    });
 });
 
 cancelCommentButtons.forEach((button) => { // add event listener to each cancel edit button, so that when it is clicked, the post is no longer being edited
-    button.addEventListener('click', async (event) => {
-        event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation(); // prevent the post from being closed when the cancel button is clicked
         closeAllComments();
         //at this point the post window reloads itself for some reason, so the post is unexpanded (fix so that the post stays expanded when the cancel button is clicked)
     });
@@ -85,14 +84,16 @@ expandablePosts.forEach((post) => {
         const id = post.id;
         //console.log(id);
         console.log(`post ${id} clicked, expanding post`);
-        console.log("post: ");
-        console.log(post);
+        //console.log("post: ");
+        //console.log(post);
         if(post.classList.contains('commenting')){ // if post is being edited, don't expand it
             console.log("post is being commented on, aborting post close");
             return;
         }
         if(post.classList.contains('expanded')){ // if post is already expanded, close it (if its not being edited)
-            closePost(post);
+            //closePost(post); old: close the post if its not being edited but is expanded. New: close the post if its expanded, regardless of whether its being edited
+            console.log("post is already expanded, cannot expand it");
+            return;
         }
         else{ // if post is not expanded, close all other posts and expand it
             closeAllPosts();
@@ -103,12 +104,13 @@ expandablePosts.forEach((post) => {
 
 submitCommentButtons.forEach((button) => {    //TODO: when the cancel edit button is clicked, the edit form is closed, but the post is still expanded
     button.addEventListener('click', async (event) => {
-        event.stopPropagation();  // prevent the event from bubbling up to the post, which would cause the post to try and close
+        event.preventDefault();
         console.log("submit comment button clicked");
-        const post = button.parentElement;
+        const post = button.parentElement.parentElement.parentElement;
+        console.log(post); //***
         const blogpostId = post.id;
-        console.log(`attempting to submit comment to post ${id}`);
-        const commentContent = post.querySelector('.commentContent').value;
+        console.log(`attempting to submit comment to post ${blogpostId}`);
+        const commentContent = post.querySelector('.comment-content').value;
         if (commentContent) {
             // Send a POST request to the API comments endpoint
             const response = await fetch(`/api/comments/${blogpostId}`, {

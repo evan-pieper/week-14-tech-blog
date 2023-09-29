@@ -27,6 +27,7 @@ router.get('/:post_id', async (req, res) => {  // get all comments for a specifi
 }); */
 
 router.post('/:blogpost_id', withAuth, async (req, res) => {  // create a new comment for a specific blogpost (req.params.id is the blogpost_id) [with auth because you have to be logged in to comment]
+    console.log("comment post route called");
     try {
         const newComment = await Comment.create({
         ...req.body, //spreads the properties of the req.body object into this new object so that we can add the user_id property to it
