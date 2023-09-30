@@ -122,7 +122,12 @@ submitCommentButtons.forEach((button) => {    //TODO: when the cancel edit butto
             });
         
             //console.log(response);
+            if(response.redirected){ // if the user is not logged in, the response will be redirected to the login page
+                alert("Error: you must be logged in to comment");
+                return;
+            }
             if (response.ok) {
+                console.log(response);
                 alert("Comment posted successfully");
                 // If successful, redirect the browser to the homepage
                 document.location.replace('/');
