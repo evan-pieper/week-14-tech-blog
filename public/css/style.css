@@ -67,3 +67,12 @@ header{
     display: none;
   }
 }
+
+.comment{
+  background-color: var(--lightColor);
+  color: var(--darkColor);
+  border: 1px solid var(--darkColor);
+  border-radius: 5px;
+  padding: 10px 10px 10px 3%;
+  margin: 10px 0 10px 0;
+}

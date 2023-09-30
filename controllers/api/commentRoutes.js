@@ -34,7 +34,7 @@ router.post('/:blogpost_id', withAuth, async (req, res) => {  // create a new co
         console.log(req.body);
         const newComment = await Comment.create({
         content: req.body.commentContent,
-        user_id: req.session.user_id, // add the user_id property to the new object (always going to be the user that is logged in because you can only comment when you are logged in)
+        commenter_id: req.session.user_id, // add the user_id property to the new object (always going to be the user that is logged in because you can only comment when you are logged in)
         blogpost_id: req.params.blogpost_id,
         date_created: dayjs(),
         });
