@@ -75,6 +75,30 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.get('/signup', (req, res) => {
+  // If the user is already logged in, redirect the request to home page
+  if (req.session.logged_in) {
+    console.error("signup route called when user is already logged in");
+    res.redirect('/');
+    return;
+  }
+
+  if (req.session.logged_in === false) {
+    res.render('signup', {
+      logged_in: req.session.logged_in //still need to pass logged in variable so buttons render correctly  
+    });
+    return;
+  }
+
+  else{
+    console.log("no session detected, rendering signup page");
+    res.render('signup', {
+      logged_in: req.session.logged_in  
+    });
+    return;
+  }
+});
+
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to home page
   if (req.session.logged_in) {

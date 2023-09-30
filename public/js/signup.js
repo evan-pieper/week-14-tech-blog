@@ -20,6 +20,12 @@ const signupFormHandler = async (event) => {
     }
 };
 
+const loginInsteadButton = document.querySelector('#login-instead-button');
+loginInsteadButton.addEventListener('click', function(){
+  document.location.replace('/login');
+});
+
+
 document
     .querySelector('.signup-form')
     .addEventListener('submit', signupFormHandler);
