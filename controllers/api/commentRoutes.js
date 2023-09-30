@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
 const { Comment } = require('../../models');
+const dayjs = require('dayjs');
 
 router.get('/:post_id', async (req, res) => {  // get all comments for a specific blogpost
     try {
@@ -29,10 +30,13 @@ router.get('/:post_id', async (req, res) => {  // get all comments for a specifi
 router.post('/:blogpost_id', withAuth, async (req, res) => {  // create a new comment for a specific blogpost (req.params.id is the blogpost_id) [with auth because you have to be logged in to comment]
     console.log("comment post route called");
     try {
+        console.log("req.body: ");
+        console.log(req.body);
         const newComment = await Comment.create({
-        ...req.body, //spreads the properties of the req.body object into this new object so that we can add the user_id property to it
+        content: req.body.commentContent,
         user_id: req.session.user_id, // add the user_id property to the new object (always going to be the user that is logged in because you can only comment when you are logged in)
         blogpost_id: req.params.blogpost_id,
+        date_created: dayjs(),
         });
     
         res.status(200).json(newComment);

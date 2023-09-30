@@ -14,10 +14,11 @@ const submitComment = async (event) => {
     console.log(commentContent);
     const blogpostId = blogpost.id; // TODO: change this to the id of the post that the comment is being made on ***********
     if (commentContent) {
+        //const newComment = { content: commentContent}
         // Send a POST request to the API endpoint
         const response = await fetch(`/api/comments/${blogpostId}`, {
           method: 'POST',
-          body: JSON.stringify({ commentContent }),
+          body: JSON.stringify({ content: commentContent }),
           headers: { 'Content-Type': 'application/json' },
         });
     
