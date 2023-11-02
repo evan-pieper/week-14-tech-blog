@@ -4,7 +4,7 @@ require('dotenv').config();
 let sequelize;
 
 if (process.env.JAWSDB_MARIA_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL, {
+  sequelize = new Sequelize(process.env.JAWSDB_MARIA_URL, {
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
@@ -21,7 +21,7 @@ if (process.env.JAWSDB_MARIA_URL) {
     {
       host: 'localhost',
       dialect: 'mysql',
-      port: 3306
+      port: 3003
     }
   );
 }
